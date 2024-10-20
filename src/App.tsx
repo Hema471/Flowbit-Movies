@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import DetailsPage from "./pages/DetailsPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import BtnUp from "./components/BtnUp/BtnUp";
+import BtnUp from "./components/BtnUp";
 import FavoritesPage from "./pages/FavoritesPage";
 import AboutPage from "./pages/AboutPage";
 
