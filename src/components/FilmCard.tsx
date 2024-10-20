@@ -4,6 +4,7 @@ import CircleRating from "./CircleRating";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { addFavorite, removeFavorite } from "../features/favSlice";
+import { toast } from "react-toastify";
 
 interface FilmCardProps {
   movie: {
@@ -69,11 +70,34 @@ const FilmCard: React.FC<FilmCardProps> = ({ movie, onClick }) => {
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     e.preventDefault(); // Prevent the card click event from firing
-    if (isFavorite) {
-      dispatch(removeFavorite(movie.id ?? 0));
+
+    if (movie && movie.id !== undefined) {
+      if (isFavorite) {
+        dispatch(removeFavorite(movie.id));
+        toast.info("Movie removed from favorites", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        // @ts-ignore
+        dispatch(addFavorite(movie));
+        toast.success("Movie added to favorites", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     } else {
-      //@ts-ignore
-      dispatch(addFavorite(movie));
+      console.error("Movie object or ID is invalid");
     }
   };
 

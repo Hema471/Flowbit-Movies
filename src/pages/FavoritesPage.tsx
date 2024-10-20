@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import FilmCard from "../components/FilmCard";
 import { Link } from "react-router-dom";
 import { clearFavorites } from "../features/favSlice"; 
+import { toast } from "react-toastify";
 
 const FavoritesPage: React.FC = () => {
   const dispatch = useDispatch(); 
@@ -10,6 +11,15 @@ const FavoritesPage: React.FC = () => {
 
   const handleClearAll = () => {
     dispatch(clearFavorites()); 
+    toast.info("All favorites cleared", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
